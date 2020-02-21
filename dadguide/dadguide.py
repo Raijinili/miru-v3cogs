@@ -1145,8 +1145,8 @@ class MonsterIndex(object):
             Attribute.Fire: ['red', 'fire'],
             Attribute.Water: ['blue', 'water'],
             Attribute.Wood: ['green', 'wood'],
-            Attribute.Light: ['light'],
-            Attribute.Dark: ['dark'],
+            Attribute.Light: ['yellow', 'white', 'light'],
+            Attribute.Dark: ['purple', 'black', 'dark'],
         }
 
         self.series_to_prefix_map = {
@@ -1158,6 +1158,7 @@ class MonsterIndex(object):
             149: ['wedding', 'bride'],
             154: ['padr'],
             175: ['valentines', 'vday', 'v'],
+            197: ['disguise'], #This is hacky
         }
 
         monster_id_to_nicknames = defaultdict(set)

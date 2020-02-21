@@ -664,7 +664,7 @@ class PadGlobal(commands.Cog):
     async def which(self, ctx, *, term: str = None):
         """Shows PAD Which Monster entries"""
 
-        if term is None:
+        if not term:
             await ctx.author.send('__**PAD Which Monster**__ *(also check out ^pad / ^padfaq / ^boards / ^glossary)*')
             msg = self.which_to_text()
             for page in pagify(msg):
