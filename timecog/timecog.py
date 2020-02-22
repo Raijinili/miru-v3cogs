@@ -298,20 +298,16 @@ def tin2tdelta(tinstr):
     return o
 
 def ydhm(seconds):
-    y = seconds // (60 * 60 * 24 * 365)
-    seconds %= (60 * 60 * 24 * 365)
-    d = seconds // (60 * 60 * 24)
-    seconds %= (60 * 60 * 24)
-    h = seconds // (60 * 60)
-    seconds %= (60 * 60)
-    m = seconds // (60)
-    y,d,h,m = [int(ydhm) for ydhm in (y,d,h,m)]
-    ydhm = []
-    if y: ydhm.append("{} yr" .format(y) + "s" if y>1 else '')
-    if d: ydhm.append("{} day".format(d) + "s" if d>1 else '')
-    if h: ydhm.append("{} hr" .format(h) + "s" if h>1 else '')
-    if m: ydhm.append("{} min".format(m) + "s" if m>1 else '')
-    return " ".join(ydhm)
+    seconds = int(seconds)
+    m, s = divmod(seconds, 60)
+    h, m = divmod(m, 60)
+    d, h = divmod(h, 24)
+    y, d = divmod(d, 365)
+    return " ".join(
+        f"{num} {suf}{'s' if num > 1 else ''}"
+        for num, suf in zip((y, d, h, m), ('yr', 'day', 'hr', 'min'))
+        if num > 0
+    )
 
 def formatrm(rmtime, input, D_TZ):
     return "'{}' on {} {} ({}{})".format(
