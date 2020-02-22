@@ -73,16 +73,16 @@ class TimeCog(commands.Cog):
                 day    = now.day,
                 hour   = now.hour,
                 minute = now.minute,
-                merid  = 'NONE',
+                merid  = '',
             )
             defaults.update({k:v for k,v in gs.items() if v})
             input = defaults.pop('input')
             for key in defaults:
-                if key not in ['merid']:
+                if key != 'merid':
                     defaults[key] = int(defaults[key])
-            if  defaults['merid'] == 'pm' and defaults['hour'] <= 12:
+            if  defaults['merid'].lower() == 'pm' and defaults['hour'] <= 12:
                 defaults['hour'] += 12
-            elif defaults['merid'] == 'NONE' and defaults['hour'] < now.hour:
+            elif defaults['merid'] == '' and defaults['hour'] < now.hour:
                 defaults['hour'] += 12
             if defaults['hour'] >= 24:
                 defaults['day'] += int(defaults['hour'] // 24)
