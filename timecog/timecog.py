@@ -12,8 +12,10 @@ from redbot.core.utils.chat_formatting import *
 
 from rpadutils import CogSettings
 
-tz_lookup = dict([(pytz.timezone(x).localize(datetime.datetime.now()).tzname(), pytz.timezone(x))
-                  for x in pytz.all_timezones])
+dummy = datetime.datetime.now()
+tz_lookup = {tz.tzname(dummy): tz
+              for tz in map(pytz.timezone, pytz.all_timezones)}
+del dummy
 
 
 time_at_regeces = [
